@@ -1,21 +1,25 @@
 return {
-    'nvim-treesitter/nvim-treesitter',
-    -- build = ':TSUpdate',
-    -- event = 'VeryLazy',
-    opts = {
-      ensure_installed = {
-        "bash",
-        "help",
-        "json",
-        "lua",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "rust",
-        "yaml",
-      },
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate',
+        -- event = 'VeryLazy',
+        event = { "BufReadPost", "BufNewFile" },
+        opts = {
+            ensure_installed = {
+              "bash",
+              "help",
+              "json",
+              "lua",
+              "markdown",
+              "markdown_inline",
+              "python",
+              "rust",
+              "yaml",
+            },
+            highlight = { enable = true },
+        },
+        config = function(_, opts)
+            require("nvim-treesitter.configs").setup(opts)
+        end,
     },
-    -- config = function()
-    --   require 'config.treesitter'
-    -- end
 }
