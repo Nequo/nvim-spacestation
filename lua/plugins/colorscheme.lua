@@ -1,8 +1,8 @@
 return {
     {
-        dir = "~/git/carbon-spice-nvim/",
+        dir = "~/git/hades-nvim/",
         config = function()
-            vim.cmd.colorscheme("carbon")
+            vim.cmd.colorscheme("hades")
         end
     }
 }
