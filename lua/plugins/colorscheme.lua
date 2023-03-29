@@ -1,7 +1,7 @@
 return {
     {
         'Nequo/hades-nvim',
-        dev = true,
+        dev = false,
         config = function()
             vim.cmd.colorscheme("hades")
         end

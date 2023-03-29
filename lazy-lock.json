@@ -1,5 +1,7 @@
 {
-  "lazy.nvim": { "branch": "main", "commit": "a80422f21750fcbf0e90b26da877d4024d76f116" },
+  "hades-nvim": { "branch": "main", "commit": "692a67a0ff165590d5cbbe69d3545f4f58c7bb86" },
+  "lazy.nvim": { "branch": "main", "commit": "57cce98dfdb2f2dd05a0567d89811e6d0505e13b" },
+  "mini.nvim": { "branch": "main", "commit": "078279d4b154fb8990b6d1fc00bf162ec5015e29" },
   "nvim-highlight-colors": { "branch": "main", "commit": "ce11467796389a4e5838c22384f94c624121796b" },
   "nvim-lspconfig": { "branch": "master", "commit": "f1392727d8ab6472b6463e875f553ebd32665d65" },
   "nvim-treesitter": { "branch": "master", "commit": "1f087c91f5ca76a2257b855d72d371a2b5302986" },
