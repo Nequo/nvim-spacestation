@@ -9,9 +9,6 @@ return {
           -- Align text
           -- require("mini.align").setup()
 
-          -- Autopairs
-          require("mini.pairs").setup()
-
           -- Commenting
           require("mini.comment").setup()
 
