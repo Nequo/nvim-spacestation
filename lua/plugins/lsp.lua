@@ -1,15 +1,15 @@
 return {
-    'kyazdani42/nvim-web-devicons',
     {
         'neovim/nvim-lspconfig',
+        dependencies = {
+            'stevearc/conform.nvim',
+            'kyazdani42/nvim-web-devicons',
+        },
         config = function()
+            local lspconfig = require('lspconfig')
             -- Mappings.
             -- See `:help vim.diagnostic.*` for documentation on any of the below functions
             local opts = { noremap=true, silent=true }
-            vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-            vim.keymap.set('n', '<space>dn', vim.diagnostic.goto_prev, {desc="prev diagnostic"})
-            vim.keymap.set('n', '<space>dp', vim.diagnostic.goto_next, {desc="next diagnostic"})
-            vim.keymap.set('n', '<space>dl', vim.diagnostic.setloclist, {desc="list diagnostic"})
             -- Disable diagnostic virtual text in favor of explicitly showing messages with above keybindings
             vim.diagnostic.config({
                 signs = {
@@ -22,36 +22,35 @@ return {
                 },
                 virtual_text = false,
             })
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                  local bufnr = args.buf
+                  local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
 
-            -- Use an on_attach function to only map the following keys
-            -- after the language server attaches to the current buffer
-            local on_attach = function(client, bufnr)
-              -- Enable completion triggered by <c-x><c-o>
-              vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+                  local builtin = require "telescope.builtin"
 
-              -- Mappings.
-              -- See `:help vim.lsp.*` for documentation on any of the below functions
-              local bufopts = { noremap=true, silent=true, buffer=bufnr }
-              vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-              vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-              vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-              vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-              vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-              vim.keymap.set('n', '<space>wl', function()
-                print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-              end, bufopts)
-              vim.keymap.set('n', '<space>l', vim.lsp.buf.type_definition, bufopts)
-              vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-              vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-              vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-              vim.keymap.set('n', '<space>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
-            end
+                  vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
+                  vim.keymap.set("n", "gd", builtin.lsp_definitions, { buffer = 0 })
+                  vim.keymap.set("n", "gr", builtin.lsp_references, { buffer = 0 })
+                  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
+                  vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
+                  vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
 
-            local lsp_flags = {
-              -- This is the default in Nvim 0.7+
-              debounce_text_changes = 150,
-            }
-            require('lspconfig')['rust_analyzer'].setup{
+                  vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+                  vim.keymap.set('n', '<space>dn', vim.diagnostic.goto_prev, {desc="prev diagnostic"})
+                  vim.keymap.set('n', '<space>dp', vim.diagnostic.goto_next, {desc="next diagnostic"})
+                  vim.keymap.set('n', '<space>dl', vim.diagnostic.setloclist, {desc="list diagnostic"})
+
+                  vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { buffer = 0 })
+                  vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { buffer = 0 })
+                  vim.keymap.set("n", "<space>wd", builtin.lsp_document_symbols, { buffer = 0 })
+
+                end,
+              })
+
+
+            -- Rust
+            lspconfig.rust_analyzer.setup{
                 on_attach = on_attach,
                 flags = lsp_flags,
                 -- Server-specific settings...
@@ -59,53 +58,38 @@ return {
                   ["rust-analyzer"] = {}
                 }
             }
-            -- Open lsp docs in floating window
-            -- https://git.sr.ht/~whynothugo/dotfiles/tree/main/item/home/.config/nvim/init.lua
-            vim.lsp.util.open_floating_preview = function(contents, syntax, opts)
-              local orig_win = vim.api.nvim_get_current_win()
-              local focus_orig = false
+            -- Gleam
+            lspconfig.gleam.setup({})
 
-              -- Focus window if already open.
-              -- FIXME: if content has changed, shouldn't focus
-              -- TODO: fix this using opts.focus_id
-              if hover_win then
-                vim.api.nvim_set_current_win(hover_win)
-              else
-                vim.api.nvim_command("30sp")
-                hover_win = vim.api.nvim_get_current_win()
-                focus_orig = true
+            -- Swift
+            lspconfig.sourcekit.setup {
+                capabilities = {
+                    workspace = {
+                        didChangeWatchedFiles = {
+                            dynamicRegistration = true,
+                        },
+                    },
+                },
+            }
 
-                -- Clean up window id when closed.
-                vim.api.nvim_create_autocmd("WinClosed", {
-                  pattern = tostring(hover_win),
-                  callback = function(_)
-                    hover_win = nil
-                  end,
-                  once = true,
-                })
-              end
+            require("conform").setup({
+              formatters_by_ft = {
+                lua = { "stylua" },
+                -- Conform will run multiple formatters sequentially
+                python = { "black" },
+                -- You can customize some of the format options for the filetype (:help conform.format)
+                rust = { "rustfmt", lsp_format = "fallback" },
+                -- Conform will run the first available formatter
+                gleam = { lsp_format = "first" },
+              },
+            })
 
-              local hover_bufnr = vim.api.nvim_create_buf(false, true)
-              vim.api.nvim_set_current_buf(hover_bufnr)
-              vim.api.nvim_buf_set_lines(hover_bufnr, 0, -1, false, contents)
-              vim.api.nvim_buf_set_name(hover_bufnr, opts.focus_id)
-              vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = hover_bufnr })
-              vim.api.nvim_set_option_value("modifiable", false, { buf = hover_bufnr })
-              vim.api.nvim_set_option_value("filetype", syntax, { buf = hover_bufnr })
-              vim.api.nvim_set_option_value("conceallevel", 3, { win = hover_win })
-              vim.api.nvim_set_option_value("concealcursor", "nvic", { win = hover_win })
-              vim.api.nvim_set_option_value("spell", false, { win = hover_win })
-
-              -- Hide window with Esc or K.
-              vim.keymap.set("n", "<Esc>", ":q<CR>", { silent = true, buffer = true })
-
-              -- Jump back with K
-              vim.cmd("nnoremap <buffer> K :call win_gotoid(" .. tostring(orig_win) .. ")<CR>")
-
-              if focus_orig then
-                vim.api.nvim_set_current_win(orig_win)
-              end
-            end
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              pattern = "*",
+              callback = function(args)
+                require("conform").format({ bufnr = args.buf })
+              end,
+            })
         end
     }
 }
