@@ -15,8 +15,10 @@ return {
               "python",
               "rust",
               "yaml",
+              "gleam",
             },
             highlight = { enable = true },
+            indent = { enable = true }
         },
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
