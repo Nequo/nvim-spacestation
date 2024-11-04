@@ -10,7 +10,7 @@ return {
           -- require("mini.align").setup()
 
           -- Commenting
-          require("mini.comment").setup()
+          -- require("mini.comment").setup()
 
           -- Surround
           require("mini.surround").setup()
