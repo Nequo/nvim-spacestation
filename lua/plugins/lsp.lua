@@ -75,19 +75,19 @@ return {
                   vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { buffer = 0 })
                   vim.keymap.set("n", "<space>wd", builtin.lsp_document_symbols, { buffer = 0 })
 
+                  vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr })
+                  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr })
+
                 end,
               })
 
 
             -- Rust
-            lspconfig.rust_analyzer.setup{
-                on_attach = on_attach,
-                flags = lsp_flags,
-                -- Server-specific settings...
-                settings = {
-                  ["rust-analyzer"] = {}
-                }
-            }
+            lspconfig.rust_analyzer.setup({})
+
+            -- Go
+            lspconfig.gopls.setup({})
+
             -- Gleam
             lspconfig.gleam.setup({})
 
