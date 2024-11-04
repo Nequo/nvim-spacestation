@@ -4,13 +4,41 @@ return {
         dependencies = {
             'stevearc/conform.nvim',
             'kyazdani42/nvim-web-devicons',
+            'SmiteshP/nvim-navic',
+            'kosayoda/nvim-lightbulb',
         },
         config = function()
             local lspconfig = require('lspconfig')
-            -- Mappings.
-            -- See `:help vim.diagnostic.*` for documentation on any of the below functions
             local opts = { noremap=true, silent=true }
-            -- Disable diagnostic virtual text in favor of explicitly showing messages with above keybindings
+            local navic = require("nvim-navic")
+            navic.setup({lsp = { auto_attach = true}})
+            require("nvim-lightbulb").setup({
+              autocmd = {
+                enabled = true,
+                updatetime = 1,
+              },
+              code_lenses = true,
+              sign = {
+                  enabled = false,
+              },
+              -- 2. Virtual text.
+              virtual_text = {
+                  enabled = true,
+                  -- Text to show in the virt_text.
+                  text = "󰌵",
+                  lens_text = "",
+                  -- Position of virtual text given to |nvim_buf_set_extmark|.
+                  -- Can be a number representing a fixed column (see `virt_text_pos`).
+                  -- Can be a string representing a position (see `virt_text_win_col`).
+                  pos = "eol",
+                  -- Highlight group to highlight the virtual text.
+                  hl = "LightBulbVirtualText",
+                  -- How to combine other highlights with text highlight.
+                  -- See `hl_mode` of |nvim_buf_set_extmark|.
+                  hl_mode = "combine",
+              },
+
+            })
             vim.diagnostic.config({
                 signs = {
                     text = {
@@ -20,6 +48,7 @@ return {
                         [vim.diagnostic.severity.HINT]  = '',
                     },
                 },
+                -- Disable diagnostic virtual text in favor of explicitly showing messages
                 virtual_text = false,
             })
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -36,6 +65,7 @@ return {
                   vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
                   vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
 
+                  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
                   vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
                   vim.keymap.set('n', '<space>dn', vim.diagnostic.goto_prev, {desc="prev diagnostic"})
                   vim.keymap.set('n', '<space>dp', vim.diagnostic.goto_next, {desc="next diagnostic"})
