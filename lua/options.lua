@@ -37,7 +37,6 @@ opt.smartcase = true -- ... unless there is a capital letter in the query
 opt.hidden = true -- I like having buffers stay around
 opt.cursorline = true -- Highlight the current line
 opt.signcolumn = "yes"
-opt.equalalways = false -- I don't like my windows changing all the time
 opt.splitright = true -- Prefer windows splitting to the right
 opt.splitbelow = true -- Prefer windows splitting to the bottom
 opt.updatetime = 1000 -- Make updates happen faster
@@ -55,3 +54,6 @@ opt.expandtab = true
 opt.linebreak = true
 
 opt.mouse = "a"
+
+opt.listchars = { tab = "  ", trail = "·", extends = "»", precedes = "«", nbsp = "░" }
+opt.list = true
