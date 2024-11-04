@@ -11,7 +11,7 @@ return {
             local lspconfig = require('lspconfig')
             local opts = { noremap=true, silent=true }
             local navic = require("nvim-navic")
-            navic.setup({lsp = { auto_attach = true}})
+            navic.setup({lsp = { auto_attach = true},highlight = true,})
             require("nvim-lightbulb").setup({
               autocmd = {
                 enabled = true,
