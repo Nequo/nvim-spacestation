@@ -12,4 +12,4 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("options")
 local opts = { dev = { path = "~/git/" } }
-require("lazy").setup('plugins', opts)
+require("lazy").setup("plugins", opts)

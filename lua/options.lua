@@ -7,7 +7,7 @@ local opt = vim.opt
 -- if hr > 6 and hr < 21 then -- day between 6am and 9pm
 --   vim.opt.background = 'light'
 -- else -- night
-vim.opt.background = 'dark'
+vim.opt.background = "dark"
 -- end
 
 opt.shortmess = ""
@@ -16,14 +16,13 @@ opt.pumheight = 10
 opt.laststatus = 3
 opt.winbar = "%{%v:lua.require'nvim-navic'.get_location()%} %= %m %f"
 
-
 opt.wildmenu = true
 opt.wildmode = { "longest", "full" }
 -- Ignore compiled files
 opt.wildignore = "__pycache__"
 opt.wildignore = opt.wildignore + { "*.o", "*~", "*.pyc", "*pycache*" }
 
-opt.completeopt = { "menuone", "noselect"}
+opt.completeopt = { "menuone", "noselect" }
 
 opt.termguicolors = true
 opt.showmode = false

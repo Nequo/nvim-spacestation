@@ -1,19 +1,17 @@
 return {
-     {
-        "echasnovski/mini.nvim",
-        event = "VeryLazy",
-        config = function()
-          -- Trailspace (highlight and remove)
-          require("mini.trailspace").setup()
+  {
+    "echasnovski/mini.nvim",
+    event = "VeryLazy",
+    config = function()
+      -- Trailspace (highlight and remove)
+      require("mini.trailspace").setup()
 
-          -- Align text
-          -- require("mini.align").setup()
+      -- Surround
+      require("mini.surround").setup()
 
-          -- Commenting
-          -- require("mini.comment").setup()
-
-          -- Surround
-          require("mini.surround").setup()
-        end,
-    },
+      -- icons!
+      require("mini.icons").setup()
+      MiniIcons.mock_nvim_web_devicons()
+    end,
+  },
 }
