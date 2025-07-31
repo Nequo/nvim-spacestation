@@ -98,6 +98,9 @@ return {
         },
       })
 
+      -- Haskell
+      lspconfig.hls.setup({})
+
       require("conform").setup({
         formatters_by_ft = {
           lua = { "stylua" },
@@ -107,6 +110,7 @@ return {
           rust = { "rustfmt", lsp_format = "fallback" },
           -- Conform will run the first available formatter
           gleam = { lsp_format = "first" },
+          haskell = { "ormolu" },
         },
       })
 

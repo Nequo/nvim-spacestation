@@ -50,11 +50,9 @@ return {
     },
     opts = {
       defaults = {
-        layout_strategy = "bottom_pane",
         sorting_strategy = "ascending",
-        layout_config = { height = 20 },
-        preview = false,
-        border = false,
+        -- preview = false,
+        -- border = false,
         prompt_prefix = "  " .. " " .. "  ",
         selection_caret = " ❯ ",
         entry_prefix = "   ",
