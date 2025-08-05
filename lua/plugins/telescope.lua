@@ -27,6 +27,13 @@ return {
         end,
       },
       {
+        "<leader>fcg",
+        desc = "edit neovim config",
+        function()
+          require("telescope.builtin").find_files({ cwd = "~/.config/ghostty/" })
+        end,
+      },
+      {
         "<leader>fg",
         desc = "live grep",
         function()
