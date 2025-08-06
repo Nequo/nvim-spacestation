@@ -5,9 +5,9 @@ local opt = vim.opt
 
 -- local hr = tonumber(os.date('%H', os.time()))
 -- if hr > 6 and hr < 21 then -- day between 6am and 9pm
---   vim.opt.background = 'light'
+--   opt.background = 'light'
 -- else -- night
-vim.opt.background = "dark"
+opt.background = "dark"
 -- end
 
 opt.shortmess = ""
@@ -56,3 +56,5 @@ opt.mouse = "a"
 
 opt.listchars = { tab = "  ", trail = "·", extends = "»", precedes = "«", nbsp = "░" }
 opt.list = true
+
+opt.winborder = "rounded"
