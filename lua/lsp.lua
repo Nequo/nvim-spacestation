@@ -1,5 +1,5 @@
 vim.lsp.enable({
-    "rust-analyzer",
+  "rust-analyzer",
 })
 vim.diagnostic.config({
   signs = {
@@ -20,6 +20,6 @@ vim.diagnostic.config({
   virtual_text = false,
   virtual_lines = {
     current_line = true,
-    severity = vim.diagnostic.severity.ERROR
-  }
+    severity = vim.diagnostic.severity.ERROR,
+  },
 })
