@@ -3,12 +3,23 @@ vim.g.maplocalleader = ","
 
 local opt = vim.opt
 
--- local hr = tonumber(os.date('%H', os.time()))
--- if hr > 6 and hr < 21 then -- day between 6am and 9pm
---   opt.background = 'light'
--- else -- night
-opt.background = "dark"
--- end
+local function set_background_from_macos()
+  local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
+  local result = handle:read("*a")
+  handle:close()
+
+  if result:match("Dark") then
+    vim.o.background = "dark"
+  else
+    vim.o.background = "light"
+  end
+end
+
+if vim.loop.os_uname().sysname == 'Darwin' then
+  set_background_from_macos()
+else
+  vim.o.background = "dark"
+end
 
 opt.shortmess = ""
 opt.shortmess = opt.shortmess + "c"
