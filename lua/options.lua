@@ -22,7 +22,7 @@ else
 end
 
 opt.shortmess = ""
-opt.shortmess = opt.shortmess + "c"
+opt.shortmess = opt.shortmess + "ct"
 opt.pumheight = 10
 opt.laststatus = 3
 opt.winbar = "%= %m %f"

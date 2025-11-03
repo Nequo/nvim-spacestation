@@ -9,14 +9,14 @@ return {
         "<leader>ff",
         desc = "find files",
         function()
-          require("telescope.builtin").find_files()
+          require("telescope.builtin").find_files({ hidden = true })
         end,
       },
       {
         "<leader>fr",
         desc = "recent files",
         function()
-          require("telescope.builtin").oldfiles()
+          require("telescope.builtin").oldfiles({ hidden = true })
         end,
       },
       {
@@ -28,9 +28,16 @@ return {
       },
       {
         "<leader>fcg",
-        desc = "edit neovim config",
+        desc = "edit ghostty config",
         function()
           require("telescope.builtin").find_files({ cwd = "~/.config/ghostty/" })
+        end,
+      },
+      {
+        "<leader>fw",
+        desc = "find in ~/git",
+        function()
+          require("telescope.builtin").find_files({ cwd = "~/git", hidden = true })
         end,
       },
       {
@@ -64,7 +71,8 @@ return {
         selection_caret = " ❯ ",
         entry_prefix = "   ",
         file_ignore_patterns = {
-          "build/*",
+          "target/",
+          ".git/",
         },
       },
     },

@@ -1,5 +1,7 @@
 vim.lsp.enable({
   "rust-analyzer",
+  "gopls",
+  "gh-actions"
 })
 vim.diagnostic.config({
   signs = {
@@ -18,8 +20,10 @@ vim.diagnostic.config({
   },
   -- Disable diagnostic virtual text in favor of explicitly showing messages
   virtual_text = false,
-  virtual_lines = {
-    current_line = true,
-    severity = vim.diagnostic.severity.WARNING,
-  },
+  virtual_lines = false,
+  signs = true,
+  -- virtual_lines = {
+  --   current_line = true,
+  --   severity = vim.diagnostic.severity.WARNING,
+  -- },
 })

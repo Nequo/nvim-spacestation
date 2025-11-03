@@ -1,20 +1,16 @@
 return {
   {
-    "Nequo/hades-nvim",
-    dev = true,
+    "Nequo/fjell-nvim",
   },
+  { "Nequo/nomad-nvim" },
+  { "jaredgorski/Mies.vim" },
+  { "jacksonludwig/vim-earl-grey" },
+  { "fcancelinha/nordern.nvim" },
+  { "Nequo/palefire-nvim" },
   {
-    "Nequo/windrunner-nvim",
-    dev = true,
-  },
-  {
-    "Nequo/nomad-nvim",
-    dev = true,
+    "Nequo/emberdark-nvim",
     config = function()
-      vim.cmd.colorscheme("nomad")
-    end,
-  },
-  {
-    "jaredgorski/SpaceCamp",
+      vim.cmd.colorscheme("emberdark")
+    end
   },
 }
