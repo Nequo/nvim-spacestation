@@ -56,6 +56,6 @@ map('n', '<leader>fcg', function()
     source = { cwd = vim.fn.expand '~/.config/ghostty' },
   })
 end, { desc = 'Pick ghostty config files' })
-map('n', '<leader>fg', '<Cmd>Pick grep<CR>')
+map('n', '<leader>fg', '<Cmd>Pick grep_live<CR>')
 
 require('mini.completion').setup()

@@ -71,9 +71,31 @@ opt.list = true
 opt.winborder = 'single'
 opt.pumborder = 'single'
 
+local opts = { silent = true }
+local map = vim.keymap.set
+map("n", "<leader>q", function() -- toggle quickfix
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      vim.cmd("cclose")
+      return
+    end
+  end
+  vim.cmd("copen")
+end)
+
 vim.cmd [[colorscheme mono]]
 
 require 'lsp'
+-- https://github.com/neovim/neovim/pull/27855
+require('vim._extui').enable({
+  enable = true, -- Whether to enable or disable the UI.
+  msg = { -- Options related to the message module.
+    ---@type 'cmd'|'msg' Where to place regular messages, either in the
+    ---cmdline or in a separate ephemeral message window.
+    target = 'cmd',
+    timeout = 2000, -- Time a message is visible in the message window.
+  },
+})
 
 -- Plugins
 local gh = function(x)
