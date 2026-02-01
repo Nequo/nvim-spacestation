@@ -5,6 +5,7 @@ Neovim config files for astronauts.
 
 ## Main goals
 
-- Try out default behaviours before bringing in a plugin. E.g. omnicompletion for lsp instead of nvim-cmp or a similar completion plugin.
+- Use builtins when convenient. E.g. vim.pack.add for plugins.
+- Use a minimal set of plugins.
 - Easy to maintain and update. Use separate files per configuration item. E.g. Each plugin in its own file under lua/plugins/.
 - Practical UI. Fluff is good when it provides some value. E.g. icons for filetypes, semantic color tokens.
