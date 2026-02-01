@@ -1,12 +1,11 @@
-local blink = require("blink.cmp")
 return {
-  cmd = { "rust-analyzer" },
-  root_markers = { "Cargo.toml", "Cargo.lock", "build.rs" },
-  filetypes = { "rust" },
+  cmd = { 'rust-analyzer' },
+  root_markers = { 'Cargo.toml', 'Cargo.lock', 'build.rs' },
+  filetypes = { 'rust' },
   settings = {
-    ["rust-analyzer"] = {
+    ['rust-analyzer'] = {
       check = {
-        command = "clippy",
+        command = 'clippy',
       },
       diagnostics = {
         enable = true,

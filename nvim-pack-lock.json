@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "mini.nvim": {
+      "rev": "9b935c218ddba02e5dc75c94f90143bce1f7c646",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "nvim-treesitter": {
+      "rev": "4967fa48b0fe7a7f92cee546c76bb4bb61bb14d5",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "oil.nvim": {
+      "rev": "f55b25e493a7df76371cfadd0ded5004cb9cd48a",
+      "src": "https://github.com/stevearc/oil.nvim"
+    }
+  }
+}
