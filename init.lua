@@ -85,13 +85,21 @@ vim.pack.add {
   { src = gh 'nvim-mini/mini.nvim' },
 }
 local nts = require 'nvim-treesitter'
+local langs = { 'lua', 'rust', 'go', 'zig', 'yaml' }
+
 nts.setup {
   install_dir = vim.fn.stdpath 'data' .. '/site',
 }
-nts.install { 'lua', 'rust', 'go', 'zig' }
+nts.install(langs)
 vim.api.nvim_create_autocmd('PackChanged', {
   callback = function()
     nts.update()
+  end,
+})
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = langs,
+  callback = function()
+    vim.treesitter.start()
   end,
 })
 require 'plugins.oil'
@@ -107,5 +115,6 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 vim.api.nvim_create_autocmd('VimResized', {
   desc = 'Auto resize splits on terminal resize',
+  group = vim.api.nvim_create_augroup('nequo/vimresized', { clear = true }),
   command = 'wincmd =',
 })

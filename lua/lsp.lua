@@ -30,6 +30,7 @@ vim.diagnostic.config {
 }
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'Configure LSP keymaps',
+  group = vim.api.nvim_create_augroup('nequo/lspattach', { clear = true }),
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if not client then
