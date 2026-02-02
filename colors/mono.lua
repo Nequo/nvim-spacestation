@@ -3,6 +3,9 @@
 -- Original Author: Jared Gorski <jaredgorski6@gmail.com>
 -- License: MIT
 
+-- Options
+-- vim.g.mono_color_comments = true  -- Use more colorful comments
+
 local color = {
   chicagoBlack1 = '#080808',
   chicagoBlack2 = '#121212',
@@ -29,175 +32,67 @@ local color = {
   chicagoBrown = '#5F5F00',
   chicagoRed = '#D70000',
   chicagoOrange = '#D75F00',
+  chicagoWheat = '#FFFFAF'
 }
 
-local dark = {
-  bg = color.chicagoBlack2,
-  bg_cursor_line = color.chicagoBlack4,
-  bg_cursor_col = color.chicagoBlack3,
-  bg_sign_col = color.chicagoBlack3,
-  bg_pmenu = color.chicagoBlack4,
-  bg_pmenu_sel = color.chicagoGray2,
-  bg_status_line = color.chicagoWhite1,
-  bg_status_line_nc = color.chicagoGray5,
-  bg_visual = color.chicagoGray2,
-  bg_color_col = color.chicagoGray2,
-  bg_line_nr = color.chicagoBlack4,
-  bg_cursor_line_nr = color.chicagoGray1,
-  bg_fold_col = color.chicagoBlack2,
-
-  fg = color.chicagoWhite1,
-  fg_cursor = color.chicagoBlack2,
-  fg_line_nr = color.chicagoGray4,
-  fg_cursor_line_nr = color.chicagoWhite1,
-  fg_comment = color.chicagoGray3,
-  fg_status_line = color.chicagoBlack2,
-  fg_status_line_nc = color.chicagoGray1,
-  fg_vert_split = color.chicagoBlack2,
-  fg_match_paren = color.chicagoWhite1,
-  fg_fold_col = color.chicagoGray6,
-  fg_non_text = color.chicagoGray3,
-
-  bg_search = color.chicagoGold1,
-  fg_search = color.chicagoBlack2,
-  fg_match = color.chicagoGold2,
-
-  diff_add_bg = color.chicagoGreen2,
-  diff_add_fg = color.chicagoBlack2,
-  diff_change_bg = color.chicagoGold1,
-  diff_change_fg = color.chicagoBlack2,
-  diff_delete_bg = color.chicagoRed,
-  diff_delete_fg = color.chicagoWhite1,
-  diff_text_bg = color.chicagoPurple,
-  diff_text_fg = color.chicagoBlack2,
-
-  diff_mode_add_bg = color.chicagoGreen2,
-  diff_mode_add_fg = color.chicagoBlack2,
-  diff_mode_change_bg = color.chicagoGold1,
-  diff_mode_change_fg = color.chicagoBlack2,
-  diff_mode_delete_bg = color.chicagoBrown,
-  diff_mode_delete_fg = color.chicagoRed,
-
-  error_msg_bg = color.chicagoRed,
-  error_msg_fg = color.chicagoWhite1,
-  warning_msg_bg = color.chicagoGold1,
-  warning_msg_fg = color.chicagoBlack2,
-
-  match_paren_bg = color.chicagoGray3,
-}
-
-local light = {
-  bg = color.chicagoWhite2,
-  bg_cursor_line = color.chicagoWhite1,
-  bg_cursor_col = color.chicagoWhite1,
-  bg_sign_col = color.chicagoGray6,
-  bg_pmenu = color.chicagoGray6,
-  bg_pmenu_sel = color.chicagoGray4,
-  bg_status_line = color.chicagoGray1,
-  bg_status_line_nc = color.chicagoGray1,
-  bg_visual = color.chicagoGray5,
-  bg_color_col = color.chicagoGray4,
-  bg_line_nr = color.chicagoGray6,
-  bg_cursor_line_nr = color.chicagoGray5,
-  bg_fold_col = color.chicagoBlack4,
-
-  fg = color.chicagoBlack1,
-  fg_cursor = color.chicagoWhite2,
-  fg_line_nr = color.chicagoBlack3,
-  fg_cursor_line_nr = color.chicagoBlack1,
-  fg_comment = color.chicagoGray3,
-  fg_status_line = color.chicagoWhite2,
-  fg_status_line_nc = color.chicagoGray6,
-  fg_vert_split = color.chicagoBlack1,
-  fg_match_paren = color.chicagoBlack1,
-  fg_fold_col = color.chicagoGray6,
-  fg_non_text = color.chicagoGray1,
-
-  bg_search = color.chicagoGray1,
-  fg_search = color.chicagoGold2,
-  fg_match = color.chicagoGold1,
-
-  diff_add_bg = color.chicagoGreen1,
-  diff_add_fg = color.chicagoBlack1,
-  diff_change_bg = color.chicagoGold2,
-  diff_change_fg = color.chicagoBlack1,
-  diff_delete_bg = color.chicagoRed,
-  diff_delete_fg = color.chicagoBlack1,
-  diff_text_bg = color.chicagoPurple,
-  diff_text_fg = color.chicagoGray1,
-
-  diff_mode_add_bg = color.chicagoGreen1,
-  diff_mode_add_fg = color.chicagoWhite2,
-  diff_mode_change_bg = color.chicagoBrown,
-  diff_mode_change_fg = color.chicagoWhite2,
-  diff_mode_delete_bg = color.chicagoBrown,
-  diff_mode_delete_fg = color.chicagoRed,
-
-  error_msg_bg = color.chicagoRed,
-  error_msg_fg = color.chicagoBlack1,
-  warning_msg_bg = color.chicagoBlack3,
-  warning_msg_fg = color.chicagoGold2,
-
-  match_paren_bg = color.chicagoGray4,
-}
-
-local function get_highlight_groups(theme)
+local function get_highlight_groups()
   local in_diff_mode = vim.opt.diff:get()
 
   return {
     -- NEOVIM EDITOR
-    ColorColumn = { bg = theme.bg_color_col },
-    Cursor = { fg = theme.fg_cursor, bg = theme.fg },
-    CursorColumn = { bg = theme.bg_cursor_col },
-    CursorLine = { bg = theme.bg_cursor_line },
-    CursorLineNr = { fg = theme.fg_cursor_line_nr, bg = theme.bg_cursor_line_nr },
-    Directory = { fg = theme.fg },
-    FoldColumn = { fg = theme.fg_fold_col, bg = theme.bg_fold_col },
+    ColorColumn = { bg = color.chicagoGray2 },
+    Cursor = { fg = color.chicagoBlack2, bg = color.chicagoWhite1 },
+    CursorColumn = { bg = color.chicagoBlack3 },
+    CursorLine = { bg = color.chicagoBlack4 },
+    CursorLineNr = { fg = color.chicagoWhite1, bg = color.chicagoGray1 },
+    Directory = { fg = color.chicagoWhite1 },
+    FoldColumn = { fg = color.chicagoGray6, bg = color.chicagoBlack2 },
     Folded = { fg = color.chicagoGray4 },
-    IncSearch = { fg = theme.fg_search, bg = theme.bg_search },
-    LineNr = { fg = theme.fg_line_nr, bg = theme.bg_line_nr },
-    MatchParen = { fg = theme.fg_match_paren, bg = theme.match_paren_bg },
-    Normal = { fg = theme.fg, bg = theme.bg },
-    Pmenu = { fg = theme.fg, bg = theme.bg_pmenu },
-    PmenuSel = { fg = color.chicagoWhite2, bg = theme.bg_pmenu_sel },
-    Search = { fg = theme.fg_search, bg = theme.bg_search },
-    SignColumn = { bg = theme.bg_sign_col },
-    StatusLine = { fg = theme.fg_status_line, bg = theme.bg_status_line },
-    StatusLineNC = { fg = theme.fg_status_line_nc, bg = theme.bg_status_line_nc },
-    VertSplit = { fg = theme.fg_vert_split, bg = color.chicagoGray3 },
-    Visual = { bg = theme.bg_visual },
+    IncSearch = { fg = color.chicagoBlack2, bg = color.chicagoGold1 },
+    CurSearch = { fg = color.chicagoBlack2, bg = color.chicagoWheat },
+    LineNr = { fg = color.chicagoGray4, bg = color.chicagoBlack4 },
+    MatchParen = { fg = color.chicagoWhite1, bg = color.chicagoGray3 },
+    Normal = { fg = color.chicagoWhite1, bg = color.chicagoBlack2 },
+    Pmenu = { fg = color.chicagoWhite1, bg = color.chicagoBlack4 },
+    PmenuSel = { fg = color.chicagoWhite2, bg = color.chicagoGray2 },
+    Search = { fg = color.chicagoBlack2, bg = color.chicagoGold1 },
+    SignColumn = { bg = color.chicagoBlack3 },
+    StatusLine = { fg = color.chicagoBlack2, bg = color.chicagoWhite1 },
+    StatusLineNC = { fg = color.chicagoGray1, bg = color.chicagoGray5 },
+    VertSplit = { fg = color.chicagoBlack2, bg = color.chicagoGray3 },
+    Visual = { bg = color.chicagoGray2 },
 
     -- GENERAL SYNTAX
-    Boolean = { fg = theme.fg },
-    Character = { fg = theme.fg },
-    Comment = { fg = theme.fg_comment, italic = true },
-    Conditional = { fg = theme.fg },
-    Constant = { fg = theme.fg },
-    Define = { fg = theme.fg },
-    ErrorMsg = { fg = theme.error_msg_fg, bg = theme.error_msg_bg },
-    Float = { fg = theme.fg },
-    Function = { fg = theme.fg },
-    Identifier = { fg = theme.fg },
-    Keyword = { fg = theme.fg },
-    Label = { fg = theme.fg },
-    NonText = { fg = theme.fg_non_text },
-    Number = { fg = theme.fg },
-    Operator = { fg = theme.fg },
-    PreProc = { fg = theme.fg },
-    Special = { fg = theme.fg },
-    SpecialKey = { fg = theme.fg },
+    Boolean = { fg = color.chicagoWhite1 },
+    Character = { fg = color.chicagoWhite1 },
+    Comment = { fg = vim.g.mono_color_comments and color.chicagoLime or color.chicagoGray3, italic = true },
+    Conditional = { fg = color.chicagoWhite1 },
+    Constant = { fg = color.chicagoWhite1 },
+    Define = { fg = color.chicagoWhite1 },
+    ErrorMsg = { fg = color.chicagoWhite1, bg = color.chicagoRed },
+    Float = { fg = color.chicagoWhite1 },
+    Function = { fg = color.chicagoWhite1 },
+    Identifier = { fg = color.chicagoWhite1 },
+    Keyword = { fg = color.chicagoWhite1 },
+    Label = { fg = color.chicagoWhite1 },
+    NonText = { fg = color.chicagoGray3 },
+    Number = { fg = color.chicagoWhite1 },
+    Operator = { fg = color.chicagoWhite1 },
+    PreProc = { fg = color.chicagoWhite1 },
+    Special = { fg = color.chicagoWhite1 },
+    SpecialKey = { fg = color.chicagoWhite1 },
     SpellBad = { fg = color.chicagoRed, italic = true, undercurl = true },
-    SpellCap = { fg = theme.fg, italic = true, undercurl = true },
-    SpellLocal = { fg = theme.fg, undercurl = true },
-    Statement = { fg = theme.fg },
-    StorageClass = { fg = theme.fg },
-    String = { fg = theme.fg },
-    Tag = { fg = theme.fg },
+    SpellCap = { fg = color.chicagoWhite1, italic = true, undercurl = true },
+    SpellLocal = { fg = color.chicagoWhite1, undercurl = true },
+    Statement = { fg = color.chicagoWhite1 },
+    StorageClass = { fg = color.chicagoWhite1 },
+    String = { fg = color.chicagoWhite1 },
+    Tag = { fg = color.chicagoWhite1 },
     Title = { bold = true },
-    Todo = { fg = theme.fg_comment, reverse = true, bold = true },
+    Todo = { fg = color.chicagoGray3, reverse = true, bold = true },
     Type = {},
     Underlined = { underline = true },
-    WarningMsg = { fg = theme.warning_msg_fg, bg = theme.warning_msg_bg },
+    WarningMsg = { fg = color.chicagoBlack2, bg = color.chicagoGold1 },
     Error = { fg = color.chicagoRed },
     Added = { fg = color.chicagoGreen2 },
     Changed = { fg = color.chicagoGold2 },
@@ -215,62 +110,50 @@ local function get_highlight_groups(theme)
     DiagnosticUnderlineOk = { sp = color.chicagoGreen2, undercurl = true },
 
     -- LSP
-    LspInlayHint = { fg = theme.fg_comment, bg = theme.bg_sign_col },
+    LspInlayHint = { fg = color.chicagoGray3, bg = color.chicagoBlack3 },
 
     -- Plugin Mini
-    MiniPickMatchRanges = { fg = theme.fg_match },
+    MiniPickMatchRanges = { fg = color.chicagoGold2 },
 
     -- DIFF HIGHLIGHTING
     DiffAdd = in_diff_mode and {
-      fg = theme.diff_mode_add_fg,
-      bg = theme.diff_mode_add_bg,
+      fg = color.chicagoBlack2,
+      bg = color.chicagoGreen2,
     } or {
-      fg = theme.diff_add_fg,
-      bg = theme.diff_add_bg,
+      fg = color.chicagoBlack2,
+      bg = color.chicagoGreen2,
     },
     DiffChange = in_diff_mode and {
-      fg = theme.diff_mode_change_fg,
-      bg = theme.diff_mode_change_bg,
+      fg = color.chicagoBlack2,
+      bg = color.chicagoGold1,
     } or {
-      fg = theme.diff_change_fg,
-      bg = theme.diff_change_bg,
+      fg = color.chicagoBlack2,
+      bg = color.chicagoGold1,
     },
     DiffDelete = in_diff_mode and {
-      fg = theme.diff_mode_delete_fg,
-      bg = theme.diff_mode_delete_bg,
+      fg = color.chicagoRed,
+      bg = color.chicagoBrown,
     } or {
-      fg = theme.diff_delete_fg,
-      bg = theme.diff_delete_bg,
+      fg = color.chicagoWhite1,
+      bg = color.chicagoRed,
     },
-    DiffText = { fg = theme.diff_text_fg, bg = theme.diff_text_bg },
+    DiffText = { fg = color.chicagoBlack2, bg = color.chicagoPurple },
 
-    BufTabLineActive = vim.o.background == 'dark' and {
+    BufTabLineActive = {
       fg = color.chicagoWhite1,
       bg = color.chicagoGray2,
-    } or {
-      fg = color.chicagoBlack1,
-      bg = color.chicagoGray3,
     },
-    BufTabLineCurrent = vim.o.background == 'dark' and {
+    BufTabLineCurrent = {
       fg = color.chicagoBlack2,
       bg = color.chicagoGray5,
-    } or {
-      fg = color.chicagoBlack1,
-      bg = color.chicagoGray4,
     },
-    BufTabLineFill = vim.o.background == 'dark' and {
+    BufTabLineFill = {
       fg = color.chicagoBlack2,
       bg = color.chicagoBlack2,
-    } or {
-      fg = color.chicagoBlack1,
-      bg = color.chicagoWhite2,
     },
-    BufTabLineHidden = vim.o.background == 'dark' and {
+    BufTabLineHidden = {
       fg = color.chicagoGray3,
       bg = color.chicagoBlack4,
-    } or {
-      fg = color.chicagoGray3,
-      bg = color.chicagoBlack3,
     },
   }
 end
@@ -283,9 +166,7 @@ local function setup()
   vim.cmd 'set t_Co=256'
   vim.g.colors_name = 'mono'
 
-  local background = vim.api.nvim_get_option 'background'
-  local theme = background == 'dark' and dark or light
-  local highlight_groups = get_highlight_groups(theme)
+  local highlight_groups = get_highlight_groups()
 
   for group, attrs in pairs(highlight_groups) do
     vim.api.nvim_set_hl(0, group, attrs)

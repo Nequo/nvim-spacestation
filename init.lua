@@ -83,6 +83,7 @@ map("n", "<leader>q", function() -- toggle quickfix
   vim.cmd("copen")
 end)
 
+-- vim.g.mono_color_comments = true
 vim.cmd [[colorscheme mono]]
 
 require 'lsp'
