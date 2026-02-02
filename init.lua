@@ -87,6 +87,8 @@ end)
 vim.cmd [[colorscheme mono]]
 
 require 'lsp'
+require 'statusline'
+
 -- https://github.com/neovim/neovim/pull/27855
 require('vim._extui').enable({
   enable = true, -- Whether to enable or disable the UI.

@@ -49,7 +49,7 @@ local function get_highlight_groups()
     FoldColumn = { fg = color.chicagoGray6, bg = color.chicagoBlack2 },
     Folded = { fg = color.chicagoGray4 },
     IncSearch = { fg = color.chicagoBlack2, bg = color.chicagoGold1 },
-    CurSearch = { fg = color.chicagoBlack2, bg = color.chicagoWheat },
+    CurSearch = { fg = color.chicagoBlack2, bg = color.chicagoGold2 },
     LineNr = { fg = color.chicagoGray4, bg = color.chicagoBlack4 },
     MatchParen = { fg = color.chicagoWhite1, bg = color.chicagoGray3 },
     Normal = { fg = color.chicagoWhite1, bg = color.chicagoBlack2 },
@@ -57,7 +57,7 @@ local function get_highlight_groups()
     PmenuSel = { fg = color.chicagoWhite2, bg = color.chicagoGray2 },
     Search = { fg = color.chicagoBlack2, bg = color.chicagoGold1 },
     SignColumn = { bg = color.chicagoBlack3 },
-    StatusLine = { fg = color.chicagoBlack2, bg = color.chicagoWhite1 },
+    StatusLine = { fg = color.chicagoWhite1, bg = color.chicagoBlack3 },
     StatusLineNC = { fg = color.chicagoGray1, bg = color.chicagoGray5 },
     VertSplit = { fg = color.chicagoBlack2, bg = color.chicagoGray3 },
     Visual = { bg = color.chicagoGray2 },
@@ -114,6 +114,13 @@ local function get_highlight_groups()
 
     -- Plugin Mini
     MiniPickMatchRanges = { fg = color.chicagoGold2 },
+    MiniStatuslineModeNormal = { fg = color.chicagoBlack2, bg = color.chicagoWhite1, bold = true },
+    MiniStatuslineModeVisual = { fg = color.chicagoBlack2, bg = color.chicagoPurple, bold = true },
+    MiniStatuslineModeInsert = { fg = color.chicagoBlack2, bg = color.chicagoGreen2, bold = true },
+    MiniStatuslineModeReplace = { fg = color.chicagoBlack2, bg = color.chicagoRed, bold = true },
+    MiniStatuslineModeCommand = { fg = color.chicagoBlack2, bg = color.chicagoGold2, bold = true },
+    MiniStatuslineModeOther = { fg = color.chicagoBlack2, bg = color.chicagoGray5, bold = true },
+    StatusLineModeInactive = { fg = color.chicagoGray3, bg = color.chicagoGray5 },
 
     -- DIFF HIGHLIGHTING
     DiffAdd = in_diff_mode and {

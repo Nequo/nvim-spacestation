@@ -47,6 +47,10 @@ M.misc = {
   toolbox = '󰦬',
   lightbulb = '󰌵',
   telescope = ' ',
+  cog = ' ',
+  info = ' ',
+  warning = ' ',
+  error = '󰅙 ',
 }
 
 return M
