@@ -1,6 +1,7 @@
 -- cobbled together from:
 -- - https://github.com/MariaSolOs/dotfiles/blob/d38272d2a56e7edff3916d53b464da07ae993587/.config/nvim/lua/statusline.lua
 -- - https://github.com/sschleemilch/dotfiles/blob/61cee9ff71e294ab92668bb4b4fdbbb943a89b92/dot_config/nvim/plugin/13_statusline.lua#L96
+-- - https://github.com/ckipp01/dots/blob/f18dc54cf295813cfa1aadb9f6bce4e9a50d3dad/nvim/.config/nvim/lua/mesopotamia/statusline_winbar.lua
 
 local M = {}
 
@@ -82,8 +83,9 @@ vim.api.nvim_create_autocmd(
 --- @param bufnr integer
 --- @return string
 local function lsp_clients_component(bufnr)
+    local icons = require'icons'
     local clients = lsp_clients[bufnr]
-    return clients and (clients .. separator) or ''
+    return (clients and (clients .. ' ' .. icons.misc.rocket .. ' ' .. separator) or '')
 end
 
 --- @param bufnr integer
@@ -113,13 +115,14 @@ local function diagnostic_component(bufnr, active)
             return ('%s%s%s%s'):format(
                 active and diagnostic_hls[severity] or '',
                 signs[severity],
+                ' ',
                 count,
                 active and '%*' or ''
             )
         end)
         :join(' ')
 
-    return result_str
+    return separator .. result_str .. '%#StatusLine#'
 end
 
 --- @param filetype string
@@ -168,6 +171,27 @@ local function get_position()
    }
 end
 
+local function scrollbar()
+  local current_line = vim.fn.line(".")
+  local total_lines = vim.fn.line("$")
+  local default_chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
+  local chars = default_chars
+  local index = 1
+
+  if current_line == 1 then
+    index = 1
+  elseif current_line == total_lines then
+    index = #chars
+  else
+    local line_no_fraction = vim.fn.floor(current_line) / vim.fn.floor(total_lines)
+    index = vim.fn.float2nr(line_no_fraction * #chars)
+    if index == 0 then
+      index = 1
+    end
+  end
+  return chars[index]
+end
+
 function M.statusline()
   local bufnr = vim.api.nvim_get_current_buf()
   local is_active = vim.fn.winwidth(0) > 0
@@ -182,8 +206,8 @@ function M.statusline()
   local encoding = get_encoding()
   local position = get_position()
 
-  local left = mode_str .. ' %#StatusLine# ' .. filename .. modified .. (diagnostics ~= '' and separator .. diagnostics or '')
-  local right = lsp_status .. filetype .. '%#StatusLine#' .. separator .. encoding .. separator .. position
+  local left = mode_str .. ' %#StatusLine# ' .. filename .. modified .. diagnostics
+  local right = lsp_status .. filetype .. '%#StatusLine#' .. separator .. encoding .. separator .. position .. ' ' .. scrollbar()
 
   return left .. "%=" .. right
 end

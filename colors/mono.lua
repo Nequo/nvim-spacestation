@@ -57,7 +57,7 @@ local function get_highlight_groups()
     PmenuSel = { fg = color.chicagoWhite2, bg = color.chicagoGray2 },
     Search = { fg = color.chicagoBlack2, bg = color.chicagoGold1 },
     SignColumn = { bg = color.chicagoBlack3 },
-    StatusLine = { fg = color.chicagoWhite1, bg = color.chicagoBlack3 },
+    StatusLine = { fg = color.chicagoGray5, bg = color.chicagoBlack3 },
     StatusLineNC = { fg = color.chicagoGray1, bg = color.chicagoGray5 },
     VertSplit = { fg = color.chicagoBlack2, bg = color.chicagoGray3 },
     Visual = { bg = color.chicagoGray2 },
@@ -114,12 +114,13 @@ local function get_highlight_groups()
 
     -- Plugin Mini
     MiniPickMatchRanges = { fg = color.chicagoGold2 },
-    MiniStatuslineModeNormal = { fg = color.chicagoBlack2, bg = color.chicagoWhite1, bold = true },
-    MiniStatuslineModeVisual = { fg = color.chicagoBlack2, bg = color.chicagoPurple, bold = true },
-    MiniStatuslineModeInsert = { fg = color.chicagoBlack2, bg = color.chicagoGreen2, bold = true },
-    MiniStatuslineModeReplace = { fg = color.chicagoBlack2, bg = color.chicagoRed, bold = true },
-    MiniStatuslineModeCommand = { fg = color.chicagoBlack2, bg = color.chicagoGold2, bold = true },
-    MiniStatuslineModeOther = { fg = color.chicagoBlack2, bg = color.chicagoGray5, bold = true },
+    MiniPickPrompt = { fg = color.chicagoWheat },
+    MiniStatuslineModeNormal = { fg = color.chicagoBlack2, bg = color.chicagoOrange },
+    MiniStatuslineModeVisual = { fg = color.chicagoBlack2, bg = color.chicagoPurple },
+    MiniStatuslineModeInsert = { fg = color.chicagoBlack2, bg = color.chicagoLime },
+    MiniStatuslineModeReplace = { fg = color.chicagoBlack2, bg = color.chicagoRed },
+    MiniStatuslineModeCommand = { fg = color.chicagoBlack2, bg = color.chicagoWhite1 },
+    MiniStatuslineModeOther = { fg = color.chicagoBlack2, bg = color.chicagoGray5 },
     StatusLineModeInactive = { fg = color.chicagoGray3, bg = color.chicagoGray5 },
 
     -- DIFF HIGHLIGHTING

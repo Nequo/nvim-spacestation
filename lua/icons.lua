@@ -38,8 +38,8 @@ M.symbol_kinds = {
 }
 
 M.misc = {
-  bug = ' ',
-  git = '',
+  bug = '',
+  git = ' ',
   palette = '󰏘',
   robot = '󰚩',
   search = '',
@@ -47,10 +47,11 @@ M.misc = {
   toolbox = '󰦬',
   lightbulb = '󰌵',
   telescope = ' ',
-  cog = ' ',
-  info = ' ',
-  warning = ' ',
-  error = '󰅙 ',
+  cog = '',
+  rocket = '󰑣',
+  info = '',
+  warning = '',
+  error = '󰅙',
 }
 
 return M
