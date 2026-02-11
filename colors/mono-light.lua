@@ -63,7 +63,7 @@ local function get_highlight_groups()
     -- GENERAL SYNTAX
     Boolean = { fg = color.chicagoBlack1 },
     Character = { fg = color.chicagoBlack1 },
-    Comment = { fg = vim.g.mono_color_comments and color.chicagoLime or color.chicagoGray3, italic = true },
+    Comment = { fg = vim.g.mono_color_comments and color.chicagoBlue or color.chicagoGray3, italic = true },
     Conditional = { fg = color.chicagoBlack1 },
     Constant = { fg = color.chicagoBlack1 },
     Define = { fg = color.chicagoBlack1 },

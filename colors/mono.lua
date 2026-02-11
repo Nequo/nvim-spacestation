@@ -65,7 +65,7 @@ local function get_highlight_groups()
     -- GENERAL SYNTAX
     Boolean = { fg = color.chicagoWhite1 },
     Character = { fg = color.chicagoWhite1 },
-    Comment = { fg = vim.g.mono_color_comments and color.chicagoLime or color.chicagoGray3, italic = true },
+    Comment = { fg = vim.g.mono_color_comments and color.chicagoBlue or color.chicagoGray3, italic = true },
     Conditional = { fg = color.chicagoWhite1 },
     Constant = { fg = color.chicagoWhite1 },
     Define = { fg = color.chicagoWhite1 },
@@ -88,7 +88,7 @@ local function get_highlight_groups()
     StorageClass = { fg = color.chicagoWhite1 },
     String = { fg = color.chicagoWhite1 },
     Tag = { fg = color.chicagoWhite1 },
-    Title = { bold = true },
+    Title = { fg = color.chicagoWheat, bold = true },
     Todo = { fg = color.chicagoGray3, reverse = true, bold = true },
     Type = {},
     Underlined = { underline = true },
@@ -172,6 +172,7 @@ local function setup()
     vim.cmd 'syntax reset'
   end
   vim.cmd 'set t_Co=256'
+  vim.o.background = 'dark'
   vim.g.colors_name = 'mono'
 
   local highlight_groups = get_highlight_groups()

@@ -10,8 +10,10 @@ local function set_background_from_macos()
 
   if result:match 'Dark' then
     vim.o.background = 'dark'
+    vim.cmd [[colorscheme flexoki-mono]]
   else
     vim.o.background = 'light'
+    vim.cmd [[colorscheme flexoki-mono-light]]
   end
 end
 
@@ -19,6 +21,7 @@ if vim.loop.os_uname().sysname == 'Darwin' then
   set_background_from_macos()
 else
   vim.o.background = 'dark'
+  vim.cmd [[colorscheme flexoki-mono]]
 end
 
 opt.shortmess = ''
@@ -83,8 +86,7 @@ map("n", "<leader>q", function() -- toggle quickfix
   vim.cmd("copen")
 end)
 
--- vim.g.mono_color_comments = true
-vim.cmd [[colorscheme mono]]
+vim.g.mono_color_comments = true
 
 require 'lsp'
 require 'statusline'
